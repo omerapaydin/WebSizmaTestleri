@@ -24,3 +24,8 @@
 - HTML kabul edilmesi gerekiyorsa güvenilir bir HTML sanitizer kullanılmalıdır.
 - Gereksiz HTML etiketleri ve özellikleri kabul edilmemelidir.
 - CSP ek bir savunma katmanı olarak kullanılabilir.
+
+## Dirbuster
+
+- DirBuster = Web sitesindeki gizli dizin ve dosyaları wordlist ile tespit etmeye yarayan enumeration aracıdır.
+  Örneğin izinli bir testte /admin/, /backup/, /uploads/ gibi doğrudan menülerde görünmeyen yolların bulunmasına yardımcı olabilir.
