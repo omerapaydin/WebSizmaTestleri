@@ -16,7 +16,7 @@
 - Netcat = TCP/UDP üzerinden bağlantı kurmaya ve dinlemeye yarayan ağ aracıdır.
 
 - Form kısmına <iframe src="http://10.0.2.4:4545/test" height="0" width="0"></iframe> // kendi ip adresi girilir
-- > nc -nvlp 4545 // localde dinleme başlar. İsteğin geldiği kaynak IP gözlemlenebilir
+- > nc -nvlp 4545 // localde girilip dinleme başlar. İsteğin geldiği kaynak IP gözlemlenebilir
 
 ### Güvenlik Önlemleri
 
