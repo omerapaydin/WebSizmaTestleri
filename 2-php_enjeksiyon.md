@@ -6,7 +6,7 @@
 
 - işlenirse sunucuda ls komutu çalıştırılır ve sonuç HTTP yanıtına aktarılıyorsa sunucudaki ilgili dizinin dosya ve klasörleri tarayıcıda görüntülenebilir.
 
-- Hedef üzerinden:
+- Hedef üzerinden tarayıcıda:
 
 - > system('ls');
 - > ...; system("whoami") // ; PHP’de mevcut ifadeyi sonlandırır ve ardından yeni bir PHP ifadesinin başlamasına olanak tanır.
