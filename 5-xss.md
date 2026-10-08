@@ -63,7 +63,9 @@ Diğer yaygın test biçimleri:
 
 - Beef'in verdiği hook kodunu tarayıcıda form kısmına gir ve kaydet. Kullanıcılar o sayfaya girdiğinde beef arayüzünde online olurlar
 
-# Savunma
+
+
+## Savunma
 
 XSS'e karşı temel savunmalar:
 
