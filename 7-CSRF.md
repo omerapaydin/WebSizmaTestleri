@@ -1,3 +1,44 @@
+# CSRF (Cross-Site Request Forgery)
+
+## CSRF Nedir?
+
+**CSRF**, giriş yapmış bir kullanıcının mevcut oturumundan yararlanılarak, kullanıcının istemediği bir işlemin onun adına gerçekleştirilmesine neden olabilen güvenlik açığıdır.
+
+Temel mantık:
+
+```text
+Kurban siteye giriş yapmış
+        ↓
+Session / Cookie mevcut
+        ↓
+Kurban istenmeyen bir isteği tetikler
+        ↓
+Tarayıcı uygun koşullarda oturum bilgisini gönderir
+        ↓
+Sunucu CSRF kontrolü yapmaz
+        ↓
+İşlem kurbanın hesabında gerçekleşebilir
+```
+
+> CSRF sadece şifre değiştirme değildir. Kullanıcının hesabında veya sistemde değişiklik yapan birçok işlem CSRF'den etkilenebilir.
+
+---
+
+# CSRF ile Hedeflenebilecek İşlemler
+
+1. Şifre Değiştirme
+2. E-posta Değiştirme
+3. Telefon Numarası Değiştirme
+4. Para Transferi
+5. Teslimat / Fatura Adresi Değiştirme
+6. Sipariş / İşlem Oluşturma
+7. Hesap Silme
+8. Profil Bilgilerini Değiştirme
+9. Abonelik İşlemleri
+10. Yönetici (Admin) İşlemleri
+
+---
+
 # CSRF — Şifre Değiştirme Örneği
 
 ## Senaryo
@@ -184,47 +225,6 @@ Kurban giriş yapmış
 → CSRF koruması yoksa
 → şifre değişikliği kurbanın hesabında gerçekleşebilir
 ```
-
-# CSRF (Cross-Site Request Forgery)
-
-## CSRF Nedir?
-
-**CSRF**, giriş yapmış bir kullanıcının mevcut oturumundan yararlanılarak, kullanıcının istemediği bir işlemin onun adına gerçekleştirilmesine neden olabilen güvenlik açığıdır.
-
-Temel mantık:
-
-```text
-Kurban siteye giriş yapmış
-        ↓
-Session / Cookie mevcut
-        ↓
-Kurban istenmeyen bir isteği tetikler
-        ↓
-Tarayıcı uygun koşullarda oturum bilgisini gönderir
-        ↓
-Sunucu CSRF kontrolü yapmaz
-        ↓
-İşlem kurbanın hesabında gerçekleşebilir
-```
-
-> CSRF sadece şifre değiştirme değildir. Kullanıcının hesabında veya sistemde değişiklik yapan birçok işlem CSRF'den etkilenebilir.
-
----
-
-# CSRF ile Hedeflenebilecek İşlemler
-
-1. Şifre Değiştirme
-2. E-posta Değiştirme
-3. Telefon Numarası Değiştirme
-4. Para Transferi
-5. Teslimat / Fatura Adresi Değiştirme
-6. Sipariş / İşlem Oluşturma
-7. Hesap Silme
-8. Profil Bilgilerini Değiştirme
-9. Abonelik İşlemleri
-10. Yönetici (Admin) İşlemleri
-
----
 
 # CSRF'de Neye Bakılır?
 
