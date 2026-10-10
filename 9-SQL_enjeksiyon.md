@@ -220,6 +220,101 @@ Burada AND 1=1# SQL mantığını değiştirmez; password string’inin bir par�
 
 ⸻
 
+## URL’de SQL Injection Açığı Aranması
+
+- Kullanıcıdan alınan veriler sunucu tarafında güvenli şekilde işlenmeden doğrudan SQL sorgularına dahil edilirse SQL Injection zafiyeti oluşabilir.
+- URL’deki GET parametreleri de kullanıcı tarafından kontrol edilebildiği için SQL Injection açısından test edilmesi gereken giriş noktalarından biridir.
+
+Örneğin uygulamanın aşağıdaki gibi bir URL kullandığını düşünelim:
+
+http://10.0.2.5/.../?username=admin
+
+Sunucu tarafında bu değer güvensiz şekilde sorguya ekleniyorsa:
+
+- > SELECT \* FROM accounts WHERE username='admin';
+
+benzeri bir sorgu oluşabilir.
+
+⸻
+
+URL Üzerinden Yorum Karakterinin Kullanılması
+
+Laboratuvar ortamında URL parametresi şu şekilde değiştirilebilir:
+
+http://10.0.2.5/.../?username=admin'%23
+
+Burada:
+
+admin' → SQL içerisindeki string ifadesini kapatır.
+%23 → # karakterinin URL-encoded karşılığıdır.
+
+- # → MySQL'de yorum başlangıcı olarak kullanılabilir.
+
+URL sunucu tarafından çözümlendiğinde parametre değeri:
+
+admin'#
+
+şeklinde işlenebilir.
+
+Güvensiz bir sorguda bunun sonucu:
+
+- > SELECT \* FROM accounts WHERE username='admin'#' AND password='...';
+
+şeklinde olabilir.
+
+# karakterinden sonraki bölüm yorum hâline geldiği için etkin sorgu:
+
+- > SELECT \* FROM accounts WHERE username='admin';
+
+şeklinde kalabilir.
+
+Böylece SQL Injection açığı bulunan bir uygulamada URL parametresi üzerinden sorgunun devamındaki koşulların etkisiz hâle getirilip getirilemediği test edilebilir.
+
+⸻
+
+URL Üzerinden UNION SELECT Kullanılması
+
+SQL Injection doğrulandıktan sonra kontrollü laboratuvar ortamında UNION SELECT, mevcut sorgunun sonucuna ikinci bir SELECT sorgusunun sonuçlarını ekleyip ekleyemediğini test etmek amacıyla kullanılabilir.
+
+Kavramsal örnek:
+
+http://10.0.2.5/.../?username=admin'%20UNION%20SELECT%20...%23
+
+URL çözümlendiğinde mantık:
+
+' UNION SELECT ... #
+
+şeklindedir.
+
+UNION SELECT kullanılabilmesi için iki sorgunun kolon sayısı ve uyumlu veri tipleri gibi yapısal gereksinimlerinin karşılanması gerekir. Bu nedenle:
+
+- > UNION SELECT \* FROM accounts
+
+ifadesinin doğrudan “tüm kullanıcıları çeker” şeklinde değerlendirilmesi teknik olarak doğru değildir. Çalışıp çalışmayacağı mevcut sorgunun yapısına, kolon sayısına, veri tiplerine ve uygulamanın sorgu sonuçlarını kullanıcıya yansıtıp yansıtmamasına bağlıdır.
+
+⸻
+
+Kısa Özet
+
+Normal URL:
+?username=admin
+↓
+URL-encoded yorum karakteri:
+?username=admin'%23
+↓
+%23 = #
+↓
+Sunucuda:
+admin'#
+↓
+Güvensiz SQL sorgusunda:
+username='admin'# ...
+↓
+
+- # sonrasındaki SQL bölümü yorum hâline gelebilir.
+
+Not: Bu örnekler yalnızca size ait laboratuvar sistemlerinde veya açıkça yetkilendirilmiş penetrasyon testlerinde SQL Injection mantığını öğrenmek ve doğrulamak amacıyla kullanılmalıdır.
+
 ## Sqlmap
 
 • Web sitesindeki SQL Injection açıklarını test eder
